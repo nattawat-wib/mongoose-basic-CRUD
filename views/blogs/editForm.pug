@@ -1,0 +1,42 @@
+extends ../layout 
+
+block content
+    .container.mt-3.text-center
+        h1 Edit you blogs
+        form(action="/blogs/edit" method="post").form.my-3.text-start
+            if (errors)
+                .alert.alert-danger
+                    each err in errors
+                        .mb-0.text-dark.fw-bold= err.msg
+
+            p.mb-0 name
+            input.form-control.mb-3(type="text", name="name" value=`${blog.name}`)
+
+            p.mb-0 author
+            input.form-control.mb-3(type="text", name="author" value=`${blog.author}`)
+
+            p.mb-0 category
+            select(name="category").form-select.mb-3
+                - if (blog.category == 'review')
+                    option(value="review" selected) review
+                - else
+                    option(value="review") review
+
+                - if (blog.category == 'travel')
+                    option(value="travel" selected) travel
+                - else
+                    option(value="travel") travel
+
+                - if (blog.category == 'novel')
+                    option(value="novel" selected) novel
+                - else
+                    option(value="novel") novel
+
+            p.mb-0 detail
+            textarea.form-control.mb-3(type="text", name="detail", rows="5") #{blog.detail}
+
+            input(type="hidden", value=`${blog._id}` name="id")
+
+            .text-end
+                a(href="/blogs").me-3.btn.btn-primary back
+                button(type="submit").btn.btn-success update

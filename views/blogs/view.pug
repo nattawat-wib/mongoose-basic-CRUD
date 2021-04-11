@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    .container.text-center.mt-5
+        .d-flex.justify-content-between.align-items-center
+            h1.fw-bold.text-warning All blogs
+            a(href="blogs/add").btn.btn-success + add new blog
+
+        .row.mt-4
+            each blog in blogs 
+                .col-lg-3.col-sm-6
+                    .card.text-start.p-3.mb-3
+                        h6 
+                            b name : 
+                            span #{blog.name}
+                        h6 
+                            b author : 
+                            span #{blog.author}
+                        h6 
+                            b category : 
+                            span #{blog.category}
+                        h6 
+                            b detail : <br>
+                            span #{blog.detail}
+
+                        .text-end
+                            a(href=`/blogs/edit/${blog._id}`).text-primary.fw-bold.pe-3 edit
+                            a(href=`/blogs/delete/${blog._id}`).text-danger.fw-bold delete  
+
+

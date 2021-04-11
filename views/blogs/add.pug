@@ -1,0 +1,29 @@
+extends ../layout 
+
+block content
+    .container.mt-3.text-center
+        h1 Create you blogs
+        form(action="/blogs/add" method="post").form.my-3.text-start
+            if (errors)
+                .alert.alert-danger
+                    each err in errors
+                        .mb-0.text-dark.fw-bold= err.msg
+
+            p.mb-0 name
+            input.form-control.mb-3(type="text", name="name")
+
+            p.mb-0 author
+            input.form-control.mb-3(type="text", name="author")
+
+            p.mb-0 category
+            select(name="category").form-select.mb-3
+                option(value="review") review 
+                option(value="travel") travel
+                option(value="novel") novel
+
+            p.mb-0 detail
+            textarea.form-control.mb-3(type="text", name="detail", rows="5")
+
+            .text-end
+                a(href="/blogs").me-3.btn.btn-primary back
+                button(type="submit").btn.btn-success +add
